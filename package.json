@@ -1,0 +1,37 @@
+{
+    "name": "taskjs",
+    "version": "2.0.0",
+    "description": "Beautiful concurrency for JavaScript",
+    "author": "David Herman <dherman@mozilla.org>",
+    "bugs": {
+        "url": "https://github.com/mozilla/task.js/issues"
+    },
+    "engines": {
+        "node": ">=0.11.3"
+    },
+    "directories": {
+        "lib": "."
+    },
+    "main": "./task.js",
+    "dependencies": {
+        "rsvp": "1.2.0"
+    },
+    "devDependencies": {
+        "grunt": "0.4.1",
+        "grunt-contrib-uglify": "0.2.2",
+        "grunt-contrib-concat": "0.3.0"
+    },
+    "scripts": {
+        "test": "grunt test"
+    },
+    "licenses": [
+        {
+            "type": "BSD",
+            "url": "https://github.com/mozilla/task.js/blob/master/COPYING"
+        }
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mozilla/task.js.git"
+    }
+}

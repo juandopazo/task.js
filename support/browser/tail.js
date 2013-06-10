@@ -1,0 +1,4 @@
+
+global.task = exports;
+
+}(this));
