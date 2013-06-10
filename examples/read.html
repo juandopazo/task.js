@@ -1,14 +1,13 @@
 <html>
 <head><title>task.js examples: read</title></head>
-<script type="application/javascript" src="../lib/task.js"></script>
+<script type="application/javascript" src="../vendor/rsvp/rsvp.js"></script>
+<script type="application/javascript" src="../dist/task.browser.js"></script>
 <script type="application/javascript;version=1.8">
-var { Deferred } = task;
-
 // promise version of XMLHttpRequest
 function read(url, method) {
     method = method || "GET";
     var xhr = new XMLHttpRequest();
-    var deferred = new Deferred();
+    var deferred = new RSVP.defer();
     xhr.onreadystatechange = function() {
         if (xhr.readyState === 4) {
             if (xhr.status >= 400) {
@@ -31,14 +30,14 @@ function read(url, method) {
 }
 
 function go() {
-    var { spawn, join } = task;
+    var { spawn } = task;
 
     var out = document.getElementById("out");
 
     spawn(function() {
         out.innerHTML = "reading...\n";
         try {
-            var [ f1, f2 ] = yield join(read("sleep.html"), read("read.html"));
+            var [ f1, f2 ] = yield RSVP.all(read("sleep.html"), read("read.html"));
             out.innerHTML += "sleep.html: " + (f1.responseText.length) + "\n";
             out.innerHTML += "read.html: " + (f2.responseText.length) + "\n";
         } catch (e) {

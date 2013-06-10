@@ -1,9 +1,28 @@
 <html>
 <head><title>task.js examples: sleep</title></head>
-<script type="application/javascript" src="../lib/task.js"></script>
+<script type="application/javascript" src="../vendor/rsvp/rsvp.js"></script>
+<script type="application/javascript" src="../dist/task.browser.js"></script>
 <script type="application/javascript;version=1.8">
 function go() {
-    var { spawn, choose, sleep } = task;
+    var { spawn } = task;
+    var { Promise } = RSVP;
+
+    function sleep(ms) {
+        return new Promise(function (resolve) {
+            setTimeout(function () {
+                resolve(ms);
+            }, ms);
+        });
+    }
+
+    function choose() {
+        var args = arguments;
+        return new Promise(function (resolve, reject) {
+            for (var i = 0, length = args.length; i < length; i++) {
+                args[i].then(resolve, reject);
+            }
+        });
+    }
 
     var out = document.getElementById("out");
 
